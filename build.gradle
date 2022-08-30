@@ -1,0 +1,32 @@
+plugins {
+    id 'java'
+    id "com.github.johnrengelman.shadow" version "7.1.1"
+}
+
+sourceCompatibility = JavaVersion.VERSION_11
+targetCompatibility = JavaVersion.VERSION_11
+
+repositories {
+    jcenter()
+    maven {
+        name 'velocity'
+        url 'https://nexus.velocitypowered.com/repository/maven-public/'
+    }
+}
+
+dependencies {
+    compileOnly 'com.velocitypowered:velocity-api:3.1.0'
+    implementation 'com.google.code.gson:gson:2.8.9'
+    compileOnly "org.projectlombok:lombok:1.18.22"
+    annotationProcessor 'com.velocitypowered:velocity-api:3.1.0'
+    annotationProcessor "org.projectlombok:lombok:1.18.22"
+}
+
+shadowJar {
+    archiveBaseName = 'geyser-auto-update-velocity'
+    destinationDirectory = file('out/')
+}
+
+artifacts {
+    archives shadowJar
+}
